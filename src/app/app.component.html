@@ -1,0 +1,82 @@
+<div *ngIf="showList">
+  <div>
+    <p style="font-size:30px">Students Records</p>
+  <button type="button" (click)="showForm()">Add Record</button> 
+  <button type="button" (click)="clearData()" *ngIf="records.length>0">Clear Record</button> 
+  </div>
+<div *ngIf="records.length>0">
+  <table border = "1">
+  <tr>
+     <th>First Name</th>
+     <th>Last Name</th>
+     <th>Email</th>
+     <th>Phone</th>
+     <th>City</th>
+     <th>State</th>
+     <th>Country</th>
+     <th>DOB</th>
+     <th>Password</th>
+  </tr>
+ 
+  <tr *ngFor="let record of records;let i=index">
+     <td>{{record.firstName}}</td>
+     <td>{{record.lastName}}</td>
+     <td>{{record.email}}</td>
+     <td>{{record.phoneNo}}</td>
+     <td>{{record.address.city}}</td>
+     <td>{{record.address.state}}</td>
+     <td>{{record.address.country}}</td>
+     <td>{{record.dob}}</td>
+     <td>{{record.password}}</td>
+  </tr>
+  
+ 
+</table>
+</div>
+</div>
+
+<div class="form" *ngIf="showFormFlag">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="margin-bottom">Candidate Registration</div>
+    <div class="margin-bottom">
+      <label for="fName" style="margin-right:8px">First Name*</label>
+      <input type="text" formControlName="firstName" />
+    </div>
+    <div class="margin-bottom">
+      <label for="lName" style="margin-right:10px">Last Name*</label>
+      <input type="text" formControlName="lastName" />
+    </div>
+    <div class="margin-bottom">
+      <label for="email" style="margin-right:43px">Email*</label>
+      <input type="email" formControlName="email" />
+    </div>
+    <div class="margin-bottom">
+      <label for="phone" style="margin-right:41px">Phone*</label>
+      <input type="number" formControlName="phoneNo" />
+    </div>
+    <div formGroupName="address">
+      <div class="margin-bottom">
+        <label for="city" style="margin-right:53px">City*</label>
+        <input type="text" formControlName="city" />
+      </div>
+      <div class="margin-bottom">
+        <label for="state" style="margin-right:50px">State*</label>
+        <input type="text" formControlName="state" />
+      </div>
+      <div class="margin-bottom">
+        <label for="country" style="margin-right:32px">Country*</label>
+        <input type="text" formControlName="country" />
+      </div>
+    </div>
+    <div class="margin-bottom">
+    <label for="dob" style="margin-right:48px">DOB*</label>
+    <input type="date" formControlName="dob" />
+  </div>
+    <div class="margin-bottom">
+    <label for="password" style="margin-right:23px">Password*</label>
+    <input type="password" formControlName="password" />
+  </div>
+    <button type="submit" style="margin-right:10px" [disabled]="!form.valid">Save</button>
+    <button type="button" (click)="hideForm()">Cancel</button>
+  </form>
+</div>
